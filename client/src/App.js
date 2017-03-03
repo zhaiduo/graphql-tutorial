@@ -21,7 +21,6 @@ const client = new ApolloClient({
 });
 
 const ChannelsList = ({ data: {loading, error, channels }}) => {
-  console.log('data', channels);
   if (loading) {
     return <p>Loading ...</p>;
   }
