@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import logo from './apollo-logo.svg';
 import './App.css';
 
-import ApolloClient from 'apollo-client';
-import { graphql, ApolloProvider } from 'react-apollo';
-import gql from 'graphql-tag';
+import { graphql, gql, ApolloClient, ApolloProvider } from 'react-apollo';
 
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
