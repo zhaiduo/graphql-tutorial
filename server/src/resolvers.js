@@ -1,9 +1,9 @@
 const channels = [{
   id: 1,
-  name: 'Channel 1',
+  name: 'soccer',
 }, {
   id: 2,
-  name: 'Channel 2',
+  name: 'baseball',
 }];
 
 
