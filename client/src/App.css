@@ -24,15 +24,51 @@ html, body {
   font-size: large;
 }
 
-ul {
-  list-style: none;
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 30px;
+  text-align: left;
+  font-weight: 200;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
 }
 
-li {
+.navbar:before {
+  content: "";
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  background-image: url('./apollo-logo.svg');
+  background-size: contain;
+  margin-right: 10px;
+}
+
+div.channelsList {
+  padding: 0 30px;
+}
+
+div.channel {
+  position: relative;
   padding: 10px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.8);
   font-weight: 400;
   width: 20%;
   text-align: left;
+  padding-left: 30px;
+}
+
+div.channel input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: #fff;
+}
+
+div.channel span {
+  position: absolute;
+  left: 10px;
 }

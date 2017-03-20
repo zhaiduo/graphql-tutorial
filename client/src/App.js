@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import logo from './apollo-logo.svg';
 import './App.css';
 
-import { graphql, gql, ApolloClient, ApolloProvider } from 'react-apollo';
+import {
+  graphql,
+  gql,
+  ApolloClient,
+  ApolloProvider,
+} from 'react-apollo';
+
 
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
@@ -12,7 +18,6 @@ const schema = makeExecutableSchema({ typeDefs });
 addMockFunctionsToSchema({ schema });
 
 const mockNetworkInterface = mockNetworkInterfaceWithSchema({ schema });
-
 
 const client = new ApolloClient({
   networkInterface: mockNetworkInterface,
@@ -26,9 +31,11 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
     return <p>{error.message}</p>;
   }
 
-  return <ul>
-    { channels.map( ch => <li key={ch.id}>{ch.name}</li> ) }
-  </ul>;
+  return (
+    <div className="channelsList">
+      { channels.map( ch => <div key={ch.id} className="channel">{ch.name}</div> ) }
+    </div>
+  );
 };
 
 const channelsListQuery = gql`
@@ -47,10 +54,7 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
         <div className="App">
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to Apollo</h2>
-          </div>
+          <div className="navbar">React + GraphQL Tutorial</div>
           <ChannelsListWithData />
         </div>
       </ApolloProvider>
