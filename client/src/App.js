@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './apollo-logo.svg';
 import './App.css';
 import ChannelsListWithData from './components/ChannelsListWithData';
 
