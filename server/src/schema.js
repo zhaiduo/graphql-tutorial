@@ -9,7 +9,11 @@ const typeDefs = `
 type Channel {
   id: ID!                # "!" denotes a required field
   name: String
+
+  # indicates if a channel has already been created on the server
+  isOptimistic: Boolean
 }
+
 # This type specifies the entry points into our API. In this case
 # there is only one - "channels" - which returns a list of channels.
 type Query {
