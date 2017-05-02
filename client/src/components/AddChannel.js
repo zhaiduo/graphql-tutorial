@@ -9,7 +9,21 @@ const AddChannel = ({ mutate }) => {
       evt.persist();
       mutate({ 
         variables: { name: evt.target.value },
-        refetchQueries: [ { query: channelsListQuery }],
+        optimisticResponse: {
+          addChannel: {
+            name: evt.target.value,
+            id: Math.random(),
+            __typename: 'Channel',
+          },
+        },
+        update: (proxy, { data: { addChannel } }) => {
+            // Read the data from the cache for this query.
+            const data = proxy.readQuery({ query: channelsListQuery });
+            // Add our channel from the mutation to the end.
+            data.channels.push(addChannel);
+            // Write the data back to the cache.
+            proxy.writeQuery({ query: channelsListQuery, data });
+          },
       })
       .then( res => {
         evt.target.value = '';  
