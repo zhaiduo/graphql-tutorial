@@ -8,9 +8,6 @@ const channels = [{
 let nextId = 3;
 
 export const resolvers = {
-  Channel: {
-    isOptimistic: () => false,
-  },
   Query: {
     channels: () => {
       return channels;
