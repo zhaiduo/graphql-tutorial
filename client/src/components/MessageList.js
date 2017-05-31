@@ -5,6 +5,7 @@ import {
 } from 'react-apollo';
 
 import AddMessage from './AddMessage';
+import NotFound from './NotFound';
 
 const MessageList = ({ data: {loading, error, messages } }) => {
   if (loading) {
@@ -12,6 +13,9 @@ const MessageList = ({ data: {loading, error, messages } }) => {
   }
   if (error) {
     return <p>{error.message}</p>;
+  }
+  if(!messages){
+    return <NotFound />
   }
 
   return (

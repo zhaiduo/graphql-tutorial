@@ -32,6 +32,9 @@ export const resolvers = {
       return channels;
     },
     messages: (root, { channelId }) => {
+      if(!channels.find(channel => channel.id == channelId))
+        return null;
+
       return messages.filter(message => message.channelId.toString() === channelId);
     },
   },

@@ -3,10 +3,12 @@ import {
   BrowserRouter,
   Link,
   Route,
+  Switch,
 } from 'react-router-dom';
 
 import './App.css';
 import ChannelsListWithData from './components/ChannelsListWithData';
+import NotFound from './components/NotFound';
 import MessageList from './components/MessageList';
 
 import {
@@ -34,8 +36,11 @@ class App extends Component {
         <BrowserRouter>
           <div className="App">
             <Link to="/" className="navbar">React + GraphQL Tutorial</Link>
-            <Route exact path="/" component={ChannelsListWithData}/>
-            <Route path="/:channelId" component={MessageList}/>
+            <Switch>
+              <Route exact path="/" component={ChannelsListWithData}/>
+              <Route path="/channel/:channelId" component={MessageList}/>
+              <Route component={ NotFound }/>
+            </Switch>
           </div>
         </BrowserRouter>
       </ApolloProvider>
