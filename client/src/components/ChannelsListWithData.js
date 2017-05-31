@@ -17,7 +17,7 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
   return (
     <div className="channelsList">
       <AddChannel />
-      { channels.map( ch => 
+      { channels.map( ch =>
         (<div key={ch.id} className={'channel ' + (ch.id < 0 ? 'optimistic' : '')}>{ch.name}</div>)
       )}
     </div>
