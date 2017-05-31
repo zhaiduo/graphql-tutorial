@@ -45,6 +45,9 @@ export const resolvers = {
       return newChannel;
     },
     addMessage: (root, args) => {
+      if(!channels.find(channel => channel.id == args.channelId))
+        throw new Error("Channel does not exist");
+
       const newMessage = { id: nextMessageId++, channelId: args.channelId, message: args.message };
       messages.push(newMessage);
       return newMessage;
