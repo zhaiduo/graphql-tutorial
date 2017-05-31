@@ -22,11 +22,11 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
     <div className="channelsList">
       <AddChannel />
       { channels.map( ch =>
-        (<Link key={ch.id} to={`channel/${ch.id}`}>
-          <div className={'channel ' + (ch.id < 0 ? 'optimistic' : '')}>
+        (<div key={ch.id} className={'channel ' + (ch.id < 0 ? 'optimistic' : '')}>
+          <Link to={ch.id < 0 ? `/` : `channel/${ch.id}`}>
             {ch.name}
-          </div>
-        </Link>)
+          </Link>
+        </div>)
       )}
     </div>
   );

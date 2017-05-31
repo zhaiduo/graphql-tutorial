@@ -30,8 +30,6 @@ const MessageList = ({ data: {loading, error, messages } }) => {
   );
 };
 
-//Needs to have a parameter for channel id
-//Fragement for each message? -> usernames and messages
 export const messageQuery = gql`
   query MessageQuery($channelId : ID!) {
     messages(channelId: $channelId) {

@@ -63,8 +63,8 @@ const addMessageMutation = gql`
 `;
 
 
-const AddMessageWithMutation = withRouter(graphql(
+const AddMessageWithMutation = graphql(
   addMessageMutation,
-)(AddMessage));
+)(withRouter(AddMessage));
 
 export default AddMessageWithMutation;
