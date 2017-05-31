@@ -6,8 +6,6 @@ import { withRouter } from 'react-router';
 const AddMessage = ({ mutate, match }) => {
   const handleKeyUp = (evt) => {
     if (evt.keyCode === 13) {
-      console.log(match);
-      console.log(match.params.channelId);
       mutate({
         variables: {
           channelId: match.params.channelId,
@@ -21,7 +19,6 @@ const AddMessage = ({ mutate, match }) => {
           },
         },
         update: (store, { data: { addMessage } }) => {
-          console.log(addMessage);
           // Read the data from the cache for this query.
           const data = store.readQuery({
             query: messageQuery,
