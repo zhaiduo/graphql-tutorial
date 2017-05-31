@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter,
+  Link,
+  Route,
+} from 'react-router-dom';
+
 import './App.css';
 import ChannelsListWithData from './components/ChannelsListWithData';
+import MessageList from './components/MessageList';
 
 import {
   ApolloClient,
@@ -24,10 +31,13 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <div className="App">
-          <div className="navbar">React + GraphQL Tutorial</div>
-          <ChannelsListWithData />
-        </div>
+        <BrowserRouter>
+          <div className="App">
+            <Link to="/" className="navbar">React + GraphQL Tutorial</Link>
+            <Route exact path="/" component={ChannelsListWithData}/>
+            <Route path="/:channelId" component={MessageList}/>
+          </div>
+        </BrowserRouter>
       </ApolloProvider>
     );
   }
