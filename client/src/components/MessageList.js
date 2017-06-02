@@ -14,7 +14,7 @@ const MessageList = ({ data: {loading, error, messages } }) => {
   if (error) {
     return <p>{error.message}</p>;
   }
-  if(!messages){
+  if(messages === null){
     return <NotFound />
   }
 
@@ -22,7 +22,7 @@ const MessageList = ({ data: {loading, error, messages } }) => {
     <div className="messagesList">
       { messages.map( message =>
         (<div key={message.id} className={'message ' + (message.id < 0 ? 'optimistic' : '')}>
-            {message.message}
+            {message.text}
         </div>)
       )}
       <AddMessage />
@@ -34,7 +34,7 @@ export const messageQuery = gql`
   query MessageQuery($channelId : ID!) {
     messages(channelId: $channelId) {
       id
-      message
+      text
     }
   }
 `;

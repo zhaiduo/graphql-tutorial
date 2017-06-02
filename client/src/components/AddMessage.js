@@ -8,12 +8,14 @@ const AddMessage = ({ mutate, match }) => {
     if (evt.keyCode === 13) {
       mutate({
         variables: {
-          channelId: match.params.channelId,
-          message: evt.target.value
+          input: {
+            channelId: match.params.channelId,
+            text: evt.target.value
+          }
         },
         optimisticResponse: {
           addMessage: {
-            message: evt.target.value,
+            text: evt.target.value,
             id: Math.round(Math.random() * -1000000),
             __typename: 'Message',
           },
@@ -54,10 +56,10 @@ const AddMessage = ({ mutate, match }) => {
 };
 
 const addMessageMutation = gql`
-  mutation addMessage($channelId: ID!, $message: String!) {
-    addMessage(channelId: $channelId, message: $message) {
+  mutation addMessage($input: MessageInput!) {
+    addMessage(input: $input) {
       id
-      message
+      text
     }
   }
 `;
