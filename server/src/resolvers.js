@@ -1,29 +1,25 @@
 const channels = [{
   id: '1',
   name: 'soccer',
+  messages: [{
+    id: '1',
+    text: 'soccer is football',
+  }, {
+    id: '2',
+    text: 'hello soccer world cup',
+  }]
 }, {
   id: '2',
   name: 'baseball',
+  messages: [{
+    id: '3',
+    text: 'baseball is life',
+  }, {
+    id: '4',
+    text: 'hello baseball world series',
+  }]
 }];
 let nextId = 3;
-
-const messages = [{
-  id: '1',
-  channelId: '1',
-  text: 'soccer is awesome',
-}, {
-  id: '2',
-  channelId: '1',
-  text: 'hello soccer world',
-}, {
-  id: '3',
-  channelId: '2',
-  text: 'baseball is life',
-}, {
-  id: '4',
-  channelId: '2',
-  text: 'hello baseball world series',
-}];
 let nextMessageId = 5;
 
 export const resolvers = {
@@ -34,7 +30,7 @@ export const resolvers = {
   },
   Mutation: {
     addChannel: (root, args) => {
-      const newChannel = { id: String(nextId++), name: args.name };
+      const newChannel = { id: String(nextId++), messages: [], name: args.name };
       channels.push(newChannel);
       return newChannel;
     },

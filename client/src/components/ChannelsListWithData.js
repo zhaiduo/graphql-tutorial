@@ -1,12 +1,12 @@
 import React from 'react';
 import {
+  Link
+} from 'react-router-dom'
+
+import {
     gql,
     graphql,
 } from 'react-apollo';
-
-import {
-  Link
-} from 'react-router-dom'
 
 import AddChannel from './AddChannel';
 

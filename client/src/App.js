@@ -9,12 +9,13 @@ import {
 import './App.css';
 import ChannelsListWithData from './components/ChannelsListWithData';
 import NotFound from './components/NotFound';
-import MessageList from './components/MessageList';
+import Messages from './components/Messages';
 
 import {
   ApolloClient,
   ApolloProvider,
   createNetworkInterface,
+  toIdValue,
 } from 'react-apollo';
 
 
@@ -38,7 +39,7 @@ class App extends Component {
             <Link to="/" className="navbar">React + GraphQL Tutorial</Link>
             <Switch>
               <Route exact path="/" component={ChannelsListWithData}/>
-              <Route path="/channel/:channelId" component={MessageList}/>
+              <Route path="/channel/:channelId" component={Messages}/>
               <Route component={ NotFound }/>
             </Switch>
           </div>
