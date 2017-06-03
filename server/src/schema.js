@@ -9,6 +9,7 @@ const typeDefs = `
 type Channel {
   id: ID!                # "!" denotes a required field
   name: String
+  messages: [Message]!
 }
 
 input MessageInput{
@@ -18,14 +19,13 @@ input MessageInput{
 
 type Message {
   id: ID!
-  channelId: ID!
   text: String
 }
 
 # This type specifies the entry points into our API
 type Query {
   channels: [Channel]    # "[]" means this is a list of channels
-  messages(channelId: ID!): [Message]
+  channel(id: ID!): Channel
 }
 
 # The mutation root type, used to define all mutations

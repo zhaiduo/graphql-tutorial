@@ -7,20 +7,20 @@ import {
 import AddMessage from './AddMessage';
 import NotFound from './NotFound';
 
-const MessageList = ({ data: {loading, error, messages } }) => {
+const MessageList = ({ data: {loading, error, channel } }) => {
   if (loading) {
     return <p>Loading ...</p>;
   }
   if (error) {
     return <p>{error.message}</p>;
   }
-  if(messages === null){
+  if(channel === null){
     return <NotFound />
   }
 
   return (
     <div className="messagesList">
-      { messages.map( message =>
+      { channel.messages.map( message =>
         (<div key={message.id} className={'message ' + (message.id < 0 ? 'optimistic' : '')}>
             {message.text}
         </div>)
@@ -31,10 +31,13 @@ const MessageList = ({ data: {loading, error, messages } }) => {
 };
 
 export const messageQuery = gql`
-  query MessageQuery($channelId : ID!) {
-    messages(channelId: $channelId) {
+  query ChannelMessageQuery($channelId : ID!) {
+    channel(id: $channelId) {
       id
-      text
+      messages {
+        id
+        text
+      }
     }
   }
 `;
@@ -42,6 +45,6 @@ export const messageQuery = gql`
 export default (graphql(messageQuery, {
   options: (props) => ({
     pollInterval: 5000,
-    variables: { channelId: props.match.params.channelId },
+    variables: { channelId: props.channelId },
   }),
 })(MessageList));

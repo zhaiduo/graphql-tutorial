@@ -1,29 +1,25 @@
 const channels = [{
   id: '1',
   name: 'soccer',
+  messages: [{
+    id: '1',
+    text: 'soccer is football',
+  }, {
+    id: '2',
+    text: 'hello soccer world cup',
+  }]
 }, {
   id: '2',
   name: 'baseball',
+  messages: [{
+    id: '3',
+    text: 'baseball is life',
+  }, {
+    id: '4',
+    text: 'hello baseball world series',
+  }]
 }];
 let nextId = 3;
-
-const messages = [{
-  id: '1',
-  channelId: '1',
-  text: 'soccer is awesome',
-}, {
-  id: '2',
-  channelId: '1',
-  text: 'hello soccer world',
-}, {
-  id: '3',
-  channelId: '2',
-  text: 'baseball is awesome',
-}, {
-  id: '4',
-  channelId: '2',
-  text: 'hello baseball world',
-}];
 let nextMessageId = 5;
 
 export const resolvers = {
@@ -31,25 +27,23 @@ export const resolvers = {
     channels: () => {
       return channels;
     },
-    messages: (root, { channelId }) => {
-      if(!channels.find(channel => channel.id === channelId))
-        return null;
-
-      return messages.filter(message => message.channelId === channelId);
+    channel: (root, { id }) => {
+      return channels.find(channel => channel.id === id);
     },
   },
   Mutation: {
     addChannel: (root, args) => {
-      const newChannel = { id: String(nextId++), name: args.name };
+      const newChannel = { id: String(nextId++), messages: [], name: args.name };
       channels.push(newChannel);
       return newChannel;
     },
     addMessage: (root, args) => {
-      if(!channels.find(channel => channel.id === args.input.channelId))
+      let channel = channels.find(channel => channel.id === args.input.channelId);
+      if(!channel)
         throw new Error("Channel does not exist");
 
-      const newMessage = { id: String(nextMessageId++), channelId: args.input.channelId, text: args.input.text };
-      messages.push(newMessage);
+      const newMessage = { id: String(nextMessageId++), text: args.input.text };
+      channel.messages.push(newMessage);
       return newMessage;
     },
   },
