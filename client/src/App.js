@@ -26,7 +26,7 @@ networkInterface.use([{
   },
 }]);
 
-function dataIdFromObject (result: any): string | null {
+function dataIdFromObject (result) {
   if (result.__typename) {
     if (result.id !== undefined) {
       return `${result.__typename}:${result.id}`;
