@@ -26,9 +26,20 @@ networkInterface.use([{
   },
 }]);
 
+function dataIdFromObject (result) {
+  if (result.__typename) {
+    if (result.id !== undefined) {
+      return `${result.__typename}:${result.id}`;
+    }
+  }
+  return null;
+}
+
 const client = new ApolloClient({
   networkInterface,
+  dataIdFromObject,
 });
+
 
 class App extends Component {
   render() {
