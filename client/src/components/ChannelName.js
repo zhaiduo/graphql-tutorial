@@ -5,7 +5,7 @@ import {
 } from 'react-apollo';
 
 
-const MessageList = () => {
+const ChannelName = () => {
 
   let channel = { name: "Stub Name"}
 
@@ -17,4 +17,4 @@ const MessageList = () => {
 };
 
 
-export default (MessageList);
+export default (ChannelName);
