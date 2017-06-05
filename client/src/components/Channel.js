@@ -2,7 +2,7 @@ import React from 'react';
 import MessageList from './MessageList';
 import ChannelName from './ChannelName';
 
-const Messages = ({ match }) => {
+const Channel = ({ match }) => {
   return (
     <div>
       <ChannelName channelId={match.params.channelId}/>
@@ -10,4 +10,4 @@ const Messages = ({ match }) => {
     </div>);
 }
 
-export default Messages;
+export default Channel;

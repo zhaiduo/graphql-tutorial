@@ -5,7 +5,7 @@ import {
 } from 'react-apollo';
 
 
-const MessageList = ({ data: {loading, error, channel } }) => {
+const ChannelName = ({ data: {loading, error, channel } }) => {
   if (loading) {
     return <p>Loading ...</p>;
   }
@@ -33,4 +33,4 @@ export default (graphql(channelQuery, {
   options: (props) => ({
     variables: { channelId: props.channelId },
   }),
-})(MessageList));
+})(ChannelName));
