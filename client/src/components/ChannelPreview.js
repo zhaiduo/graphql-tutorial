@@ -5,7 +5,7 @@ import {
 } from 'react-apollo';
 
 
-const ChannelName = () => {
+const ChannelPreview = () => {
 
   let channel = { name: "Stub Name"}
 
@@ -17,4 +17,4 @@ const ChannelName = () => {
 };
 
 
-export default (ChannelName);
+export default (ChannelPreview);

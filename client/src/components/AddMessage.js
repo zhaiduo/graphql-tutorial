@@ -1,7 +1,8 @@
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
-import { messageQuery } from './MessageList';
+import { channelDetailsQuery } from './ChannelDetails';
 import { withRouter } from 'react-router';
+
 
 const AddMessage = ({ match }) => {
   const handleKeyUp = (evt) => {
