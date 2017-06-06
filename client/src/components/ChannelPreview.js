@@ -5,7 +5,7 @@ import {
 } from 'react-apollo';
 
 
-const ChannelName = ({ data: {loading, error, channel } }) => {
+const ChannelPreview = ({ data: {loading, error, channel } }) => {
   if (loading) {
     return <p>Loading ...</p>;
   }
@@ -14,10 +14,12 @@ const ChannelName = ({ data: {loading, error, channel } }) => {
   }
 
   return (
-    <div className="channelName">
-      {channel.name}
-    </div>
-  );
+    <div>
+      <div className="channelName">
+        {channel.name}
+      </div>
+      <div>Loading Messages</div>
+    </div>);
 };
 
 export const channelQuery = gql`
@@ -33,4 +35,4 @@ export default (graphql(channelQuery, {
   options: (props) => ({
     variables: { channelId: props.channelId },
   }),
-})(ChannelName));
+})(ChannelPreview));

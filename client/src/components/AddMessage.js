@@ -1,6 +1,6 @@
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
-import { messageQuery } from './MessageList';
+import { channelDetailsQuery } from './ChannelDetails';
 import { withRouter } from 'react-router';
 
 const AddMessage = ({ mutate, match }) => {
@@ -8,7 +8,7 @@ const AddMessage = ({ mutate, match }) => {
     if (evt.keyCode === 13) {
       mutate({
         variables: {
-          input: {
+          message: {
             channelId: match.params.channelId,
             text: evt.target.value
           }
@@ -23,7 +23,7 @@ const AddMessage = ({ mutate, match }) => {
         update: (store, { data: { addMessage } }) => {
           // Read the data from the cache for this query.
           const data = store.readQuery({
-            query: messageQuery,
+            query: channelDetailsQuery,
             variables: {
               channelId: match.params.channelId,
             }
@@ -32,7 +32,7 @@ const AddMessage = ({ mutate, match }) => {
           data.channel.messages.push(addMessage);
           // Write the data back to the cache.
           store.writeQuery({
-            query: messageQuery,
+            query: channelDetailsQuery,
             variables: {
               channelId: match.params.channelId,
             },
@@ -56,8 +56,8 @@ const AddMessage = ({ mutate, match }) => {
 };
 
 const addMessageMutation = gql`
-  mutation addMessage($input: MessageInput!) {
-    addMessage(input: $input) {
+  mutation addMessage($message: MessageInput!) {
+    addMessage(message: $message) {
       id
       text
     }

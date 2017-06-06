@@ -31,7 +31,7 @@ type Query {
 # The mutation root type, used to define all mutations
 type Mutation {
   addChannel(name: String!): Channel
-  addMessage(input: MessageInput!): Message
+  addMessage(message: MessageInput!): Message
 }
 `;
 
