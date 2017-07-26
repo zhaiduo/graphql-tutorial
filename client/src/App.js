@@ -2,25 +2,32 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import { ApolloClient, gql, graphql, ApolloProvider, } from 'react-apollo';
+import { ApolloClient, gql, graphql, ApolloProvider, createNetworkInterface } from 'react-apollo';
 
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
-import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
+//import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
 import { typeDefs } from './schema';
 const schema = makeExecutableSchema({
   typeDefs
 });
-addMockFunctionsToSchema({
+
+const networkInterface = createNetworkInterface({
+  uri: 'http://localhost:4000/graphql'
+});
+
+/*addMockFunctionsToSchema({
   schema
 });
 const mockNetworkInterface = mockNetworkInterfaceWithSchema({
   schema
-});
+});*/
 
-//const client = new ApolloClient();
 const client = new ApolloClient({
-  networkInterface: mockNetworkInterface,
+  networkInterface
 });
+/*const client = new ApolloClient({
+  networkInterface: mockNetworkInterface,
+});*/
 
 /*const ChannelsList = () => (<ul>
                               <li>
@@ -52,11 +59,13 @@ const ChannelsList = ({data: {loading, error, channels}}) => {
            </p>;
   }
   console.log("channels", channels)
-  return <div className="App-intro"><ul className="Item-list">
-           { channels.map(ch => <li key={ ch.id }>
-                                  { ch.name }
-                                </li>) }
-         </ul></div>;
+  return <div className="App-intro">
+           <ul className="Item-list">
+             { channels.map(ch => <li key={ ch.id }>
+                                    { ch.name }
+                                  </li>) }
+           </ul>
+         </div>;
 };
 const ChannelsListWithData = graphql(channelsListQuery)(ChannelsList);
 
