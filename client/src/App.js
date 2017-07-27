@@ -7,6 +7,11 @@ import { ApolloClient, gql, graphql, ApolloProvider, createNetworkInterface } fr
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 //import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
 import { typeDefs } from './schema';
+
+import AddChannel from './components/AddChannel';
+
+import { channelsListQuery, ChannelsList } from './lib';
+
 const schema = makeExecutableSchema({
   typeDefs
 });
@@ -14,6 +19,13 @@ const schema = makeExecutableSchema({
 const networkInterface = createNetworkInterface({
   uri: 'http://localhost:4000/graphql'
 });
+
+//to see what the UX would be like if the network was slower
+networkInterface.use([{
+  applyMiddleware(req, next) {
+    setTimeout(next, 500);
+  },
+}]);
 
 /*addMockFunctionsToSchema({
   schema
@@ -29,44 +41,6 @@ const client = new ApolloClient({
   networkInterface: mockNetworkInterface,
 });*/
 
-/*const ChannelsList = () => (<ul>
-                              <li>
-                                Channel 1
-                              </li>
-                              <li>
-                                Channel 2
-                              </li>
-                            </ul>);*/
-
-const channelsListQuery = gql`
-   query ChannelsListQuery {
-     channels {
-       id
-       name
-     }
-   }
- `;
-
-const ChannelsList = ({data: {loading, error, channels}}) => {
-  if (loading) {
-    return <p>
-             Loading ...
-           </p>;
-  }
-  if (error) {
-    return <p>
-             { error.message }
-           </p>;
-  }
-  console.log("channels", channels)
-  return <div className="App-intro">
-           <ul className="Item-list">
-             { channels.map(ch => <li key={ ch.id }>
-                                    { ch.name }
-                                  </li>) }
-           </ul>
-         </div>;
-};
 const ChannelsListWithData = graphql(channelsListQuery)(ChannelsList);
 
 class App extends Component {

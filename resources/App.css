@@ -21,10 +21,14 @@
   list-style: none;
 }
 
-.Item-list li {
+.Item-list div {
   border: 1px dotted gray;
   width: 20%;
-  height: 3em;  
+  height: 3em;
   margin: auto;
   text-align: left;
+}
+
+div.optimistic {
+  color: rgba(255, 255, 255, 0.5);
 }
